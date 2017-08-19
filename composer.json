@@ -1,0 +1,21 @@
+{
+    "name": "allanroberto18/sweetheart",
+    "description": "Using Facebook Graph API with PHP",
+    "require": {
+        "facebook/graph-sdk": "v5.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.3"
+    },
+    "authors": [
+        {
+            "name": "Allan Roberto",
+            "email": "allanroberto18@gmail.com"
+        }
+    ],
+    "autoload" : {
+        "psr-4": {
+            "API\\" : "src/"
+        }
+    }
+}
