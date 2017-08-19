@@ -5,16 +5,19 @@ use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
 {
-    private function getEntity() : User {
+    private function getEntity(): User
+    {
         return new User();
     }
 
-    public function test_user_class_exist() {
+    public function test_user_class_exist()
+    {
         $expect = User::class;
         $this->assertInstanceOf($expect, $this->getEntity());
     }
 
-    public function test_set_get_Id() {
+    public function test_set_get_Id()
+    {
         $entity = $this->getEntity();
 
         $entity->setId(1);
@@ -23,7 +26,8 @@ class UserTest extends TestCase
         $this->assertEquals($expect, $entity->getId());
     }
 
-    public function test_set_get_FacebookId() {
+    public function test_set_get_FacebookId()
+    {
         $entity = $this->getEntity();
 
         $entity->setFacebookId('foo123');
@@ -32,7 +36,8 @@ class UserTest extends TestCase
         $this->assertEquals($expect, $entity->getFacebookId());
     }
 
-    public function test_set_get_Name() {
+    public function test_set_get_Name()
+    {
         $entity = $this->getEntity();
 
         $entity->setName('User Test');
@@ -41,7 +46,8 @@ class UserTest extends TestCase
         $this->assertEquals($expect, $entity->getName());
     }
 
-    public function test_set_get_Email() {
+    public function test_set_get_Email()
+    {
         $entity = $this->getEntity();
 
         $entity->setEmail('user@teste.com');
@@ -50,7 +56,8 @@ class UserTest extends TestCase
         $this->assertEquals($expect, $entity->getEmail());
     }
 
-    public function test_set_get_Image() {
+    public function test_set_get_Image()
+    {
         $entity = $this->getEntity();
 
         $entity->setImage('img.png');
@@ -59,12 +66,35 @@ class UserTest extends TestCase
         $this->assertEquals($expect, $entity->getImage());
     }
 
-    public function test_set_get_IsActive() {
+    public function test_set_get_IsActive()
+    {
         $entity = $this->getEntity();
 
         $entity->setIsActive(true);
         $expect = true;
 
         $this->assertEquals($expect, $entity->getIsActive());
+    }
+
+    public function test_hydrate()
+    {
+        $arr = [
+            'id' => 1,
+            'facebook_id' => '123',
+            'name' => 'User Test',
+            'email' => 'user@test.com',
+            'image' => 'img.png',
+            'is_active' => true
+        ];
+
+        $obj = new User();
+        $obj->hydrate($arr);
+
+        $this->assertEquals(1, $obj->getId());
+        $this->assertEquals('123', $obj->getFacebookId());
+        $this->assertEquals('User Test', $obj->getName());
+        $this->assertEquals('user@test.com', $obj->getEmail());
+        $this->assertEquals('img.png', $obj->getImage());
+        $this->assertEquals(true, $obj->getIsActive());
     }
 }

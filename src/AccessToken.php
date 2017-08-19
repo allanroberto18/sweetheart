@@ -7,14 +7,13 @@ class AccessToken
     private $id;
     private $userId;
     private $token;
-    private $isActive;
 
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
-        return $this->id;
+        return (int) $this->id;
     }
 
     /**
@@ -57,19 +56,12 @@ class AccessToken
         $this->token = $token;
     }
 
-    /**
-     * @return bool
-     */
-    public function getisActive(): bool
+    public function hydrate(array $data): AccessToken
     {
-        return $this->isActive;
-    }
+        $this->id = $data['id'];
+        $this->userId = $data['user_id'];
+        $this->token = $data['token'];
 
-    /**
-     * @param bool $isActive
-     */
-    public function setIsActive(bool $isActive): void
-    {
-        $this->isActive = $isActive;
+        return $this;
     }
 }

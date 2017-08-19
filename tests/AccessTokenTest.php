@@ -41,12 +41,19 @@ class AccessTokenTest extends TestCase
         $this->assertEquals($expect, $entity->getToken());
     }
 
-    public function test_set_get_IsActive() {
-        $entity = $this->getEntity();
+    public function test_hydrate()
+    {
+        $arr = [
+            'id' => 1,
+            'user_id' => 1,
+            'token' => 'MyToken'
+        ];
 
-        $entity->setIsActive(true);
-        $expect = true;
+        $obj = new AccessToken();
+        $obj->hydrate($arr);
 
-        $this->assertEquals($expect, $entity->getIsActive());
+        $this->assertEquals(1, $obj->getId());
+        $this->assertEquals(1, $obj->getUserId());
+        $this->assertEquals('MyToken', $obj->getToken());
     }
 }

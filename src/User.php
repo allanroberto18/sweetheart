@@ -14,9 +14,9 @@ class User
     /**
      * @return integer
      */
-    public function getId(): int
+    public function getId(): ?int
     {
-        return $this->id;
+        return (int) $this->id;
     }
 
     /**
@@ -105,6 +105,18 @@ class User
     public function setIsActive(bool $isActive) : void
     {
         $this->isActive = $isActive;
+    }
+
+    public function hydrate(array $data): User
+    {
+        $this->id = $data['id'];
+        $this->facebookId = $data['facebook_id'];
+        $this->name = $data['name'];
+        $this->email = $data['email'];
+        $this->image = $data['image'];
+        $this->isActive = $data['is_active'];
+
+        return $this;
     }
 
 }
